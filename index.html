@@ -26,12 +26,19 @@
       letter-spacing: 1px;
       color: #174080;
     }
-    .gallery {
+    .gallery-one-column {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: 1fr;
+      gap: 28px;
+      margin-bottom: 36px;
+    }
+    .gallery-two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 28px;
     }
-    .gallery img {
+    .gallery-one-column img,
+    .gallery-two-column img {
       width: 100%;
       height: auto;
       border-radius: 14px;
@@ -39,8 +46,10 @@
       border: 1.5px solid #e3e7ef;
       transition: transform 0.2s;
       cursor: pointer;
+      background: #fff;
     }
-    .gallery img:hover {
+    .gallery-one-column img:hover,
+    .gallery-two-column img:hover {
       transform: scale(1.025);
       box-shadow: 0 6px 30px rgba(23,64,128,0.15);
     }
@@ -82,9 +91,12 @@
       cursor: pointer;
       z-index: 10000;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
       .container { padding: 8px; }
       h1 { font-size: 1.3rem; }
+      .gallery-two-column {
+        grid-template-columns: 1fr;
+      }
       .lightbox-close { top: 10px; right: 16px; font-size: 2rem; }
     }
   </style>
@@ -95,42 +107,37 @@
     <p style="margin-bottom:28px; font-size:1.11rem; color:#345; max-width: 700px;">
       Real words from real students. Here are screenshots of the authentic feedback and messages I've received from my students after their classes. Thank you for your trust and effort. Your progress inspires me to keep giving my best as your teacher.
     </p>
-    <div class="gallery">
+    <!-- One image per row for Testimonials 1-7 -->
+    <div class="gallery-one-column">
       <div>
         <img src="Testimonials_1.jpg" alt="Student feedback 1" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_2.jpg" alt="Student feedback 2" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_3.jpg" alt="Student feedback 3" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_4.jpg" alt="Student feedback 4" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_5.jpg" alt="Student feedback 5" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_6.jpg" alt="Student feedback 6" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_7.jpg" alt="Student feedback 7" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
+    </div>
+    <!-- Two images side by side for Testimonials 8-9 -->
+    <div class="gallery-two-column">
       <div>
         <img src="Testimonials_8.jpg" alt="Student feedback 8" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
       <div>
         <img src="Testimonials_9.jpg" alt="Student feedback 9" onclick="openLightbox(this)">
-        <div class="caption"></div>
       </div>
     </div>
   </div>
