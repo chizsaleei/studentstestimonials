@@ -38,6 +38,7 @@
       box-shadow: 0 2px 16px rgba(0,0,0,0.08);
       border: 1.5px solid #e3e7ef;
       transition: transform 0.2s;
+      cursor: pointer;
     }
     .gallery img:hover {
       transform: scale(1.025);
@@ -49,54 +50,113 @@
       font-size: 1.08rem;
       color: #556;
     }
+    /* Lightbox Styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.8);
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox.active {
+      display: flex;
+    }
+    .lightbox img {
+      max-width: 95vw;
+      max-height: 95vh;
+      border-radius: 14px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      background: #fff;
+      padding: 8px;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 24px; right: 40px;
+      font-size: 2.5rem;
+      color: #fff;
+      background: none;
+      border: none;
+      cursor: pointer;
+      z-index: 10000;
+    }
     @media (max-width: 600px) {
       .container { padding: 8px; }
       h1 { font-size: 1.3rem; }
+      .lightbox-close { top: 10px; right: 16px; font-size: 2rem; }
     }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Student Testimonials</h1>
-    <p style="margin-bottom:28px; font-size:1.11rem; color:#345; max-width: 700px;">Real words from real students. Here are screenshots of the authentic feedback and messages I've received from my students after their classes. Thank you for your trust and effort. Your progress inspires me to keep giving my best as your teacher.</p>
+    <p style="margin-bottom:28px; font-size:1.11rem; color:#345; max-width: 700px;">
+      Real words from real students. Here are screenshots of the authentic feedback and messages I've received from my students after their classes. Thank you for your trust and effort. Your progress inspires me to keep giving my best as your teacher.
+    </p>
     <div class="gallery">
       <div>
-        <img src="Testimonials_1.jpg" alt="Student feedback 1">
+        <img src="Testimonials_1.jpg" alt="Student feedback 1" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_2.jpg" alt="Student feedback 2">
+        <img src="Testimonials_2.jpg" alt="Student feedback 2" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_3.jpg" alt="Student feedback 3">
+        <img src="Testimonials_3.jpg" alt="Student feedback 3" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_4.jpg" alt="Student feedback 4">
+        <img src="Testimonials_4.jpg" alt="Student feedback 4" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_5.jpg" alt="Student feedback 5">
+        <img src="Testimonials_5.jpg" alt="Student feedback 5" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_6.jpg" alt="Student feedback 6">
+        <img src="Testimonials_6.jpg" alt="Student feedback 6" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_7.jpg" alt="Student feedback 7">
+        <img src="Testimonials_7.jpg" alt="Student feedback 7" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_8.jpg" alt="Student feedback 8">
+        <img src="Testimonials_8.jpg" alt="Student feedback 8" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
       <div>
-        <img src="Testimonials_9.jpg" alt="Student feedback 9">
+        <img src="Testimonials_9.jpg" alt="Student feedback 9" onclick="openLightbox(this)">
         <div class="caption"></div>
       </div>
     </div>
   </div>
+  <!-- Lightbox HTML -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)">&times;</button>
+    <img src="" alt="Enlarged feedback" id="lightbox-img">
+  </div>
+  <script>
+    function openLightbox(img) {
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox').classList.add('active');
+    }
+    function closeLightbox(event) {
+      if (event.target.classList.contains('lightbox') || event.target.classList.contains('lightbox-close')) {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightbox-img').src = '';
+      }
+    }
+    // Optional: Allow ESC key to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightbox-img').src = '';
+      }
+    });
+  </script>
 </body>
 </html>
