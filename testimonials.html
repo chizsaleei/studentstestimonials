@@ -1,0 +1,37 @@
+<script>
+  const urls = [
+    "./data/testimonials.json",
+    "https://chizsaleei.github.io/studentstestimonials/testimonials.json",
+    "https://raw.githubusercontent.com/chizsaleei/studentstestimonials/main/testimonials.json"
+  ];
+
+  const target = document.getElementById("testi-grid");
+
+  function render(list){
+    target.innerHTML = "";
+    list.forEach(t => {
+      const card = document.createElement("article");
+      card.className = "testi-card";
+      card.innerHTML = `
+        <div class="testi-quote">“${t.quote}”</div>
+        <div class="testi-meta">
+          <div class="testi-name">${t.name}</div>
+          <div class="testi-role">${t.role || ""}</div>
+        </div>`;
+      target.appendChild(card);
+    });
+  }
+
+  (async () => {
+    for (const u of urls) {
+      try {
+        const r = await fetch(u, {cache:"no-store"});
+        if (!r.ok) continue;
+        const data = await r.json();
+        render(data);
+        return;
+      } catch {}
+    }
+    target.innerHTML = "<p style='color: var(--muted)'>Unable to load testimonials.</p>";
+  })();
+</script>
